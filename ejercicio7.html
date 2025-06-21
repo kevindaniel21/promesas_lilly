@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Obtener Ubicación</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded shadow text-center">
+        <h1 class="font-bold text-xl mb-4">Ubicación del usuario</h1>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded mb-4" id="btnUbicacion">Obtener ubicación</button>
+        <p id="resultado" class="text-sm text-gray-800">Esperando...</p>
+    </div>
+
+    <script>
+        function obtenerUbicacion() {
+            return new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(
+                (pos) => resolve(pos.coords),
+                (err) => reject("Error al obtener ubicación")
+            );
+            });
+        }
+
+        document.getElementById("btnUbicacion").addEventListener("click", () => {
+            obtenerUbicacion()
+            .then(coords => resultado.textContent = `Lat: ${coords.latitude}, Lon: ${coords.longitude}`)
+            .catch(err => resultado.textContent = err);
+        });
+
+        const resultado = document.getElementById("resultado");
+    </script>
+</body>
+</html>

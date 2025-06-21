@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Simular Base de Datos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded shadow text-center">
+        <h1 class="text-xl font-bold mb-2">Buscar Usuario</h1>
+        <p id="resultado" class="text-sm text-gray-700">Buscando usuario con ID 1...</p>
+    </div>
+
+    <script>
+        const baseDatos = {
+            1: "Juan",
+            2: "María"
+        };
+    
+        function buscarUsuario(id) {
+            return new Promise((resolve, reject) => {
+            if (baseDatos[id]) {
+                resolve(`Usuario: ${baseDatos[id]}`);
+            } else {
+                reject("No encontrado");
+            }
+            });
+        }
+    
+        buscarUsuario(1)
+            .then(msg => resultado.textContent = msg)
+            .catch(err => resultado.textContent = err);
+    
+        const resultado = document.getElementById("resultado");
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Cargar Múltiples Imágenes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-6 rounded shadow text-center space-y-4">
+        <h1 class="text-xl font-bold">Cargar imágenes</h1>
+        <div id="contenedor" class="flex gap-2 justify-center"></div>
+        <p id="mensaje" class="text-sm"></p>
+    </div>
+
+    <script>
+        function cargarImagen(url) {
+            return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = url;
+            img.onload = () => resolve(img);
+            img.onerror = () => reject("Error");
+            });
+        }
+    
+        const urls = [
+            "https://via.placeholder.com/100",
+            "https://via.placeholder.com/150"
+        ];
+    
+        Promise.all(urls.map(cargarImagen))
+            .then(imagenes => {
+            imagenes.forEach(img => document.getElementById("contenedor").appendChild(img));
+            mensaje.textContent = "Todas las imágenes cargadas.";
+            })
+            .catch(() => mensaje.textContent = "Error al cargar alguna imagen.");
+        
+        const mensaje = document.getElementById("mensaje");
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Promesa con Condición</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded shadow text-center">
+        <h1 class="text-xl font-bold">Condición > 10</h1>
+        <p id="mensaje" class="text-sm text-gray-700"></p>
+    </div>
+
+    <script>
+        function verificar(valor) {
+            return new Promise((resolve, reject) => {
+            valor > 10 ? resolve("Correcto") : reject("Incorrecto");
+            });
+        }
+    
+        verificar(12)
+            .then(msg => mensaje.textContent = msg)
+            .catch(err => mensaje.textContent = err);
+    
+        const mensaje = document.getElementById("mensaje");
+    </script>
+</body>
+</html>

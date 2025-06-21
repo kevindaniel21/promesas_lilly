@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cargar JSON Simulado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded shadow text-center">
+        <h1 class="font-bold text-xl mb-2">JSON Local</h1>
+        <pre id="json" class="text-sm text-gray-700"></pre>
+    </div>
+
+    <script>
+        function cargarJSON() {
+            return new Promise(resolve => {
+            setTimeout(() => {
+                resolve({ nombre: "Test" });
+            }, 500);
+            });
+        }
+    
+        cargarJSON().then(obj => {
+            document.getElementById("json").textContent = JSON.stringify(obj, null, 2);
+        });
+    </script>
+</body>
+</html>

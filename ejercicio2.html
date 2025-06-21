@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Esperar con Promesa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded shadow text-center">
+        <h1 class="text-xl font-bold mb-4">Esperando...</h1>
+        <p id="mensaje" class="text-blue-600">Cargando...</p>
+    </div>
+
+    <script>
+        // Esta función espera el tiempo indicado en milisegundos y luego resuelve
+        function esperar(ms) {
+            return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve("Listo");
+            }, ms);
+            });
+        }
+
+        const mensaje = document.getElementById("mensaje");
+
+        esperar(2000).then(res => mensaje.textContent = res);
+    </script>
+</body>
+</html>

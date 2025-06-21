@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lectura Sensor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded shadow text-center">
+        <h1 class="font-bold text-xl">Sensor</h1>
+        <p id="mensaje" class="text-sm text-gray-700">Leyendo sensor...</p>
+    </div>
+
+    <script>
+        function leerSensor() {
+            return new Promise(resolve => {
+            setTimeout(() => resolve("35°C"), 1000);
+            });
+        }
+    
+        leerSensor().then(res => mensaje.textContent = "Temperatura: " + res);
+    
+        const mensaje = document.getElementById("mensaje");
+    </script>
+</body>
+</html>

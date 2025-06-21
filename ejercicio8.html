@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Login + Perfil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 rounded shadow text-center space-y-4 w-80">
+        <h1 class="font-bold text-xl">Login y Perfil</h1>
+        <input id="usuario" placeholder="Usuario" class="border p-2 w-full rounded" />
+        <input id="clave" type="password" placeholder="Clave" class="border p-2 w-full rounded" />
+        <button id="btn" class="bg-blue-500 text-white py-2 px-4 rounded">Entrar</button>
+        <p id="resultado" class="text-sm"></p>
+    </div>
+
+    <script>
+        function login(usuario, clave) {
+            return new Promise((resolve, reject) => {
+            if (usuario === "admin" && clave === "123") {
+                resolve(usuario);
+            } else {
+                reject("Login incorrecto");
+            }
+            });
+        }
+
+        function obtenerPerfil(usuario) {
+            return new Promise((resolve) => {
+            resolve(`Perfil de ${usuario}: rol admin`);
+            });
+        }
+
+        document.getElementById("btn").addEventListener("click", () => {
+            const usuario = document.getElementById("usuario").value;
+            const clave = document.getElementById("clave").value;
+
+            login(usuario, clave)
+            .then(obtenerPerfil)
+            .then(perfil => resultado.textContent = perfil)
+            .catch(err => resultado.textContent = err);
+        });
+
+        const resultado = document.getElementById("resultado");
+    </script>
+</body>
+</html>

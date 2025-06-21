@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Verificar Sesión</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded shadow text-center space-y-4">
+        <h1 class="text-xl font-bold">Sesión</h1>
+        <p id="resultado" class="text-sm text-gray-800">Verificando...</p>
+    </div>
+
+    <script>
+        function verificarSesion(token) {
+            return new Promise((resolve, reject) => {
+            token === "valido" ? resolve("Sesión activa") : reject("Caducado");
+            });
+        }
+    
+        verificarSesion("valido")
+            .then(msg => resultado.textContent = msg)
+            .catch(err => resultado.textContent = err);
+    
+        const resultado = document.getElementById("resultado");
+    </script>
+</body>
+</html>

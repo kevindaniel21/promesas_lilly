@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Secuencia de Pasos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded shadow text-center space-y-2">
+        <h1 class="text-xl font-bold">Secuencia</h1>
+        <p id="pasos" class="text-sm text-gray-700">Iniciando...</p>
+    </div>
+
+    <script>
+        function paso1() {
+            return new Promise(resolve => setTimeout(() => resolve("Paso 1"), 500));
+        }
+    
+        function paso2() {
+            return new Promise(resolve => setTimeout(() => resolve(" → Paso 2"), 500));
+        }
+    
+        function paso3() {
+            return new Promise(resolve => setTimeout(() => resolve(" → Paso 3"), 500));
+        }
+    
+        const pasos = document.getElementById("pasos");
+    
+        paso1()
+            .then(res1 => {
+            pasos.textContent = res1;
+            return paso2();
+            })
+            .then(res2 => {
+            pasos.textContent += res2;
+            return paso3();
+            })
+            .then(res3 => {
+            pasos.textContent += res3;
+            });
+    </script>
+</body>
+</html>

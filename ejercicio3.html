@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Llamar API</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded shadow text-center">
+        <h1 class="text-xl font-bold mb-4">Datos desde API</h1>
+        <pre id="datos" class="text-sm text-left bg-gray-100 p-2 rounded overflow-auto max-w-sm h-48"></pre>
+    </div>
+
+    <script>
+        // Llama una API pública y convierte la respuesta en JSON
+        function obtenerDatos(url) {
+            return fetch(url)
+            .then(res => res.json());
+        }
+
+        const datos = document.getElementById("datos");
+
+        obtenerDatos("https://jsonplaceholder.typicode.com/users/1")
+            .then(json => {
+            datos.textContent = JSON.stringify(json, null, 2);
+            })
+            .catch(err => {
+            datos.textContent = "Error al cargar los datos.";
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Timeout con Promise.race</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded shadow text-center space-y-4">
+        <h1 class="font-bold text-xl">Timeout de 5 segundos</h1>
+        <p id="mensaje" class="text-sm text-gray-800">Esperando respuesta...</p>
+    </div>
+
+    <script>
+        function esperar(ms) {
+            return new Promise(resolve => setTimeout(() => resolve("Demoró demasiado"), ms));
+        }
+    
+        Promise.race([
+            fetch("https://jsonplaceholder.typicode.com/posts/1"),
+            esperar(5000)
+        ])
+        .then(res => mensaje.textContent = "Respuesta recibida o Timeout")
+        .catch(() => mensaje.textContent = "Error o Timeout");
+    
+        const mensaje = document.getElementById("mensaje");
+    </script>
+</body>
+</html>

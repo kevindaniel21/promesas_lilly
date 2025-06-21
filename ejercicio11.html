@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Compra Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded shadow text-center space-y-3 w-80">
+        <h1 class="font-bold text-xl">Simular Compra</h1>
+        <button id="btn" class="bg-blue-600 text-white px-4 py-2 rounded">Comprar</button>
+        <p id="mensaje" class="text-sm text-gray-800"></p>
+    </div>
+
+    <script>
+        function validarStock(producto) {
+            return new Promise((resolve, reject) => {
+            producto === "disponible" ? resolve() : reject("Sin stock");
+            });
+        }
+    
+        function procesarPago(tarjeta) {
+            return new Promise((resolve, reject) => {
+            tarjeta ? resolve() : reject("Pago fallido");
+            });
+        }
+    
+        const mensaje = document.getElementById("mensaje");
+    
+        document.getElementById("btn").addEventListener("click", () => {
+            validarStock("disponible")
+            .then(() => procesarPago("1234-5678"))
+            .then(() => mensaje.textContent = "Compra exitosa")
+            .catch(err => mensaje.textContent = err);
+        });
+    </script>
+</body>
+</html>

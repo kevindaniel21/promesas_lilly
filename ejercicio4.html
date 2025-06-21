@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Login Simulado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded shadow text-center space-y-4">
+        <h1 class="text-xl font-bold">Login Simulado</h1>
+        <input id="usuario" type="text" placeholder="Usuario" class="border p-2 rounded w-full">
+        <input id="clave" type="password" placeholder="Clave" class="border p-2 rounded w-full">
+        <button id="loginBtn" class="bg-blue-500 text-white px-4 py-2 rounded">Ingresar</button>
+        <p id="resultado" class="text-sm text-gray-700"></p>
+    </div>
+
+    <script>
+    // Simula un login
+        function login(usuario, clave) {
+            return new Promise((resolve, reject) => {
+                if (usuario === "admin" && clave === "123") {
+                resolve("Bienvenido");
+            } else {
+                reject("Error: Usuario o clave incorrectos");
+            }
+            });
+        }
+
+        const btn = document.getElementById("loginBtn");
+        const resultado = document.getElementById("resultado");
+
+        btn.addEventListener("click", () => {
+            const usuario = document.getElementById("usuario").value;
+            const clave = document.getElementById("clave").value;
+
+            login(usuario, clave)
+            .then(res => resultado.textContent = res)
+            .catch(err => resultado.textContent = err);
+        });
+    </script>
+</body>
+</html>

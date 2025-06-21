@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Leer Archivos Paralelo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded shadow text-center space-y-2">
+        <h1 class="text-xl font-bold">Archivos paralelos</h1>
+        <p id="resultado" class="text-sm text-gray-700">Cargando...</p>
+    </div>
+
+    <script>
+        function leerArchivo(path) {
+            return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                path ? resolve(`Contenido de ${path}`) : reject("Error");
+            }, 1000);
+            });
+        }
+
+        Promise.all([
+            leerArchivo("a.txt"),
+            leerArchivo("b.txt")
+        ])
+            .then(res => resultado.textContent = res.join(" | "))
+            .catch(err => resultado.textContent = err);
+
+        const resultado = document.getElementById("resultado");
+    </script>
+</body>
+</html>

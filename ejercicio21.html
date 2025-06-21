@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Validar Formulario con Promesas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded shadow text-center space-y-2 w-80">
+        <h1 class="font-bold text-xl">Validar Formulario</h1>
+        <input id="nombre" placeholder="Nombre" class="border p-2 w-full rounded" />
+        <input id="correo" placeholder="Correo" class="border p-2 w-full rounded" />
+        <button id="validarBtn" class="bg-blue-500 text-white px-4 py-2 rounded">Validar</button>
+        <p id="mensaje" class="text-sm text-gray-700"></p>
+    </div>
+
+    <script>
+        function validarNombre(nombre) {
+            return new Promise((resolve, reject) => {
+            nombre ? resolve() : reject("Nombre vacío");
+            });
+        }
+    
+        function validarCorreo(correo) {
+            return new Promise((resolve, reject) => {
+            correo.includes("@") ? resolve() : reject("Correo inválido");
+            });
+        }
+    
+        document.getElementById("validarBtn").addEventListener("click", () => {
+            const nombre = document.getElementById("nombre").value;
+            const correo = document.getElementById("correo").value;
+        
+            Promise.all([
+            validarNombre(nombre),
+            validarCorreo(correo)
+            ])
+            .then(() => mensaje.textContent = "Formulario válido")
+            .catch(err => mensaje.textContent = err);
+        });
+    
+        const mensaje = document.getElementById("mensaje");
+    </script>
+</body>
+</html>

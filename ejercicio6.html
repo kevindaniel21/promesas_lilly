@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Enviar Formulario Simulado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded shadow w-80 text-center space-y-4">
+        <h1 class="font-bold text-xl">Formulario</h1>
+        <input id="nombre" type="text" placeholder="Nombre" class="border w-full p-2 rounded">
+        <input id="correo" type="email" placeholder="Correo" class="border w-full p-2 rounded">
+        <button id="btnEnviar" class="bg-blue-500 text-white py-2 px-4 rounded">Enviar</button>
+        <p id="mensaje" class="text-sm text-gray-700"></p>
+    </div>
+
+    <script>
+        function enviarFormulario(datos) {
+            return new Promise((resolve, reject) => {
+            if (datos.nombre && datos.correo.includes("@")) {
+                resolve("Formulario enviado");
+            } else {
+                reject("Error de validación");
+            }
+            });
+        }
+
+        document.getElementById("btnEnviar").addEventListener("click", () => {
+            const datos = {
+                nombre: document.getElementById("nombre").value,
+                correo: document.getElementById("correo").value
+            };
+            enviarFormulario(datos)
+            .then(msg => mensaje.textContent = msg)
+            .catch(err => mensaje.textContent = err);
+        });
+
+        const mensaje = document.getElementById("mensaje");
+    </script>
+</body>
+</html>

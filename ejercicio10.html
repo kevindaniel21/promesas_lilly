@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Leer Archivos en Secuencia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 rounded shadow w-96 text-center space-y-2">
+        <h1 class="text-xl font-bold">Lectura en secuencia</h1>
+        <p id="resultado" class="text-sm text-gray-700">Iniciando...</p>
+    </div>
+
+    <script>
+        function leerArchivo(nombre) {
+            return new Promise((resolve) => {
+            setTimeout(() => resolve(`Leído ${nombre}`), 1000);
+            });
+        }
+
+        const resultado = document.getElementById("resultado");
+
+        leerArchivo("a.txt")
+            .then(res1 => {
+            resultado.textContent = res1;
+            return leerArchivo("b.txt");
+            })
+            .then(res2 => {
+            resultado.textContent += " → " + res2;
+            return leerArchivo("c.txt");
+            })
+            .then(res3 => {
+            resultado.textContent += " → " + res3;
+            });
+    </script>
+</body>
+</html>

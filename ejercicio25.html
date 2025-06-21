@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Control de Errores</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded shadow text-center">
+        <h1 class="text-xl font-bold">Control de errores</h1>
+        <p id="mensaje" class="text-sm text-red-600">Cargando archivo...</p>
+    </div>
+
+    <script>
+    function leerArchivo(path) {
+        return new Promise((resolve, reject) => {
+        path === "inexistente.txt" ? reject("Archivo no existe") : resolve("Contenido");
+        });
+    }
+
+    leerArchivo("inexistente.txt")
+        .then(res => mensaje.textContent = res)
+        .catch(err => mensaje.textContent = "Error: " + err);
+
+    const mensaje = document.getElementById("mensaje");
+    </script>
+</body>
+</html>

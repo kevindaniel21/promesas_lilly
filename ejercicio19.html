@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Esperar Múltiples Tiempos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded shadow text-center space-y-2">
+        <h1 class="text-xl font-bold">Esperas múltiples</h1>
+        <p id="resultado" class="text-sm text-gray-700">Esperando...</p>
+    </div>
+
+    <script>
+    function esperar(ms) {
+        return new Promise(resolve => setTimeout(() => resolve(`Esperó ${ms}ms`), ms));
+    }
+
+    Promise.all([esperar(1000), esperar(2000)])
+        .then(() => resultado.textContent = "Todos los tiempos terminaron");
+
+    const resultado = document.getElementById("resultado");
+    </script>
+</body>
+</html>
